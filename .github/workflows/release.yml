@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v1
+      - name: Install dependencies and toml-cli
+        run: |
+          uv sync --ci
+          uv pip install toml-cli
+      - name: Get version from tag
+        id: tag_name
+        # This strips the 'v' prefix from the tag name, e.g. v1.2.3 -> 1.2.3
+        run: echo "tag=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+      - name: Update pyproject.toml
+        run: uv run toml-cli set project.version ${{ env.tag }} > pyproject.toml.new && mv pyproject.toml.new pyproject.toml
+      - name: Commit and push updated pyproject.toml
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add pyproject.toml
+          git commit -m "chore(release): update version to v${{ env.tag }}"
+          git push
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          # This will automatically generate release notes from the commits since the last release.
+          generate_release_notes: true

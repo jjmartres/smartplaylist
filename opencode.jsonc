@@ -1,0 +1,65 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "google-vertex/gemini-2.5-pro",
+  "small_model": "google-vertex/gemini-2.5-flash",
+  "instructions": [".opencode/rules/*.md"],
+  "theme": "catppuccin",
+  "provider": {
+    "google-vertex": {
+      "models": {
+        "gemini-2.5-flash": {
+          "temperature": true,
+        },
+        "gemini-2.5-pro": {
+          "temperature": true,
+        },
+      },
+      "options": {
+        "project": "{env:VERTEXAI_PROJECT_ID}",
+        "location": "{env:VERTEXAI_REGION}",
+      },
+    },
+    "anthropic": {
+      "models": {
+        "claude-opus-4-1": {
+          "temperature": true,
+          "limit": {
+            "context": 500,
+            "output": 0,
+          },
+        },
+        "claude-sonnet-4-5": {
+          "temperature": true,
+          "limit": {
+            "context": 500,
+            "output": 0,
+          },
+        },
+        "claude-3-5-haiku-latest": {
+          "temperature": true,
+          "limit": {
+            "context": 500,
+            "output": 0,
+          },
+        },
+      },
+      "options": {
+        "apiKey": "{env:ANTHROPIC_API_KEY}",
+      },
+    },
+  },
+  "share": "manual",
+  "tui": {
+    "scroll_speed": 3,
+  },
+  "agent": {
+    "python-pro": {},
+  },
+  "mcp": {
+    "smartplaylist": {
+      "type": "remote",
+      "url": "http://personal.local:8000/mcp",
+      "enabled": true,
+    },
+  },
+}

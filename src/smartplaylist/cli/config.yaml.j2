@@ -1,0 +1,19 @@
+directory: {{ directory }}
+library: {{ library }}
+
+# Prevent any modifications to your files
+import:
+    move: no
+    copy: no
+    write: no           # Don't write tags back to files
+    autotag: no         # Don't auto-tag
+    quiet: yes
+
+# Only enable smartplaylist plugin
+plugins: smartplaylist
+
+# Playlist configuration only
+smartplaylist:
+    relative_to: {{ relative_to }}
+    playlist_dir: {{ playlist_dir }}
+    playlist_extension: m3u8

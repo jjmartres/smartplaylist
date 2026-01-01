@@ -1,0 +1,38 @@
+# Docker-specific
+.dockerignore
+Dockerfile
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Venv
+.venv/
+venv/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Local settings
+.env*
+
+# IDEs
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test artifacts
+.pytest_cache/
+.coverage
+coverage/

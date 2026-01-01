@@ -1,0 +1,44 @@
+[project]
+name = "smartplaylist"
+version = "0.1.0"
+description = "Smartplaylist lets you interact with your music library as you would with a person, creating complex playlists from your music collection by simply describing what you want to hear."
+authors = [{ name = "Jean-Jacques Martres", email = "jjmartres@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = [
+  "beets",
+  "typer",
+  "PyYAML",
+  "Jinja2",
+  "platformdirs",
+  "pydantic",
+  "mcp",
+  "click",
+  "pydantic-settings",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "black",
+  "mypy",
+  "pytest-mock",
+  "typer[all]",
+  "types-PyYAML",
+]
+
+[project.scripts]
+smartplaylist = "smartplaylist.main:main"
+
+[tool.ruff]
+line-length = 88
+
+[tool.black]
+line-length = 88
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+
+[tool.coverage.report]
+exclude_lines = ["if __name__ == .__main__.:"]
